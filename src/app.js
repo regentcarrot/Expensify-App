@@ -42,14 +42,13 @@ const store= configureStore();
 
 //addexpense like waterbill/ gasbill
 
-store.dispatch(addexpense({description:'waterbill', barber:'peter', amount:65000}));
+store.dispatch(addexpense({description:'waterbill', amount:65000}));
 //settextfilter= 'bill'
 
-store.dispatch(addexpense({description:'rent', barber:'gabriella', amount:35000, createAt:55}))
+store.dispatch(addexpense({description:'rent', amount:35000, createAt:55}))
 
-store.dispatch(addexpense({description:'tax', barber:'beddy', amount:35000, createAt:55}))
 
-store.dispatch(addexpense({description:'bill', barber:'sienna', amount:35000, createAt:125, }))
+store.dispatch(addexpense({description:'bill', amount:35000, createAt:125, }))
 
 
 //getvisibleexpenses- print visibleones to the screen.
