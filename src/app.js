@@ -40,6 +40,8 @@ import ExpenseListFilters from'./components/ExpenseListFilters';
 
 const store= configureStore();
 
+console.log('test')
+
 //addexpense like waterbill/ gasbill
 
 store.dispatch(addexpense({description:'waterbill', amount:65000}));
@@ -62,7 +64,7 @@ store.dispatch(addexpense({description:'bill', amount:35000, createAt:125, }))
  
     const visibleExpenses= getvisibleexpenses(state.expenses,state.filters)
     
-     console.log(visibleExpenses);
+     
  
 
      const jsx = (
