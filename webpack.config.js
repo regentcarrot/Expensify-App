@@ -1,16 +1,17 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+//const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = (env)=> {
     const isProduction= env==='production';
-    const CSSextract= new ExtractTextPlugin('styles.css');
+    const CSSextract= new MiniCssExtractPlugin({ filename: 'styles.css' });
     console.log('env',env);
 return  {
 
     entry:"./src/app.js",
     output: {
-        path: path.join(__dirname,'public'),
+        path: path.join(__dirname,'public','dist'),
         filename:"bundle.js"
     },
     module:{
@@ -20,8 +21,8 @@ return  {
     },
     {
         test:/\.s?css$/,
-        use:CSSextract.extract({
-            use:[
+    
+            use:[MiniCssExtractPlugin.loader,
                 {loader:'css-loader',
             options:{
                 sourceMap:true
@@ -32,15 +33,15 @@ return  {
             }
             }
             ]
-        }
-)
+ 
     }]
     },
     plugins:[CSSextract],
     devtool: isProduction?'source-map': 'inline-source-map',
     devServer: {
         contentBase:path.join(__dirname,'public'),
-        historyApiFallback:true
+        historyApiFallback:true,
+        publicPath:'/dist/'
     }
 
 };
