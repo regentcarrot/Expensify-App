@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export default (expenses, {text, person, sortby,startdate,enddate})=> {
+export default (expenses, {text, sortby,startdate,enddate})=> {
 
     return  expenses.filter((expense)=> {
         

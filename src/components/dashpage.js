@@ -1,12 +1,14 @@
 import React from 'react';
 import ExpenseList from './ExpenseList';
 import ConnectedExpenseList from './ExpenseList';
-import ExpenseListFilter from './ExpenseListFilters';
+import ExpenseListFilters from './ExpenseListFilters';
+import ExpensesSummary from './ExpensesSummary';
 
 const dashpage= ()=> (
 
     <div>
-    <ExpenseListFilter/>
+    <ExpensesSummary/>
+    <ExpenseListFilters/>
     <ExpenseList/></div>
 
 );
