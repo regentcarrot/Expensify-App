@@ -3,6 +3,7 @@ import React from 'react';
 import {BrowserRouter,Route, Switch, Link, NavLink} from 'react-router-dom';
 
 import addpage from '../components/addpage';
+import ExpensesSummary from '../components/ExpensesSummary';
 import dashpage from '../components/dashpage';
 import editpage from '../components/editpage';
 import Header from '../components/header';
