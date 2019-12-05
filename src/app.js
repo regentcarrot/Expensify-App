@@ -32,11 +32,14 @@ import configureStore from './store/configureStore'
 
 import {addexpense} from './actions/expenses';
 
-import {settextfilter} from './actions/filters';
+import {startSetExpenses} from './actions/expenses';
 
 import getvisibleexpenses from './selectors/expenses';
 
 import ExpenseListFilters from'./components/ExpenseListFilters';
+
+import './firebase/firebase';
+//import './playground/promises';
 
 const store= configureStore();
 
@@ -44,13 +47,13 @@ console.log('test')
 
 //addexpense like waterbill/ gasbill
 
-store.dispatch(addexpense({description:'waterbill', amount:65000}));
-//settextfilter= 'bill'
-
-store.dispatch(addexpense({description:'rent', amount:35000, createAt:55}))
+// store.dispatch(addexpense({description:'waterbill', amount:65000}));
 
 
-store.dispatch(addexpense({description:'bill', amount:35000, createAt:125, }))
+// store.dispatch(addexpense({description:'rent', amount:35000, createAt:55}))
+
+
+// store.dispatch(addexpense({description:'bill', amount:35000, createAt:125, }))
 
 
 //getvisibleexpenses- print visibleones to the screen.
@@ -76,7 +79,9 @@ store.dispatch(addexpense({description:'bill', amount:35000, createAt:125, }))
         
      );
 
+     ReactDOM.render(<p>loading...</p> , document.getElementById("app"));
 
+     store.dispatch(startSetExpenses()).then(()=>{ ReactDOM.render(jsx , document.getElementById("app"));})
 /*const Layout= (props)=> {
 
     return <div>
@@ -167,7 +172,7 @@ store.dispatch(addexpense({description:'bill', amount:35000, createAt:125, }))
  
      )};*/
  
- ReactDOM.render(jsx , document.getElementById("app"));
+
 
 
 

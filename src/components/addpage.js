@@ -1,7 +1,7 @@
 import React from 'react';
 import AddExpenseForm from './AddExpenseForm';
 import {connect} from 'react-redux';
-import { addexpense } from '../actions/expenses';
+import { startAddExpense } from '../actions/expenses';
 
 
 const addpage= (props)=> (
@@ -14,7 +14,7 @@ const addpage= (props)=> (
    
     onSubmit= {(expen)=>{
         
-        props.dispatch(addexpense(expen))
+        props.dispatch(startAddExpense(expen))
         props.history.push('/');
         console.log(props.expensesdesc)
         
