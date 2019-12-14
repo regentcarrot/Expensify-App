@@ -9,8 +9,12 @@ const dashpage= ()=> (
     <div>
     <ExpensesSummary/>
     <ExpenseListFilters/>
-    <ExpenseList/></div>
+    <ExpenseList/>
+
+   
+   </div>
 
 );
 
 export default dashpage;
+

@@ -25,6 +25,7 @@ class AddExpenseForm extends React.Component{
         createAt:props.expense? moment(props.expense.createAt): moment(),
         haveExpense: props.expense? true:false,
         expensesdesc: props.expensesdesc,
+        userid: props.expense? props.expense.userid:props.loggeduser,
         expensesnote: props.expensesnote,
         thenotes: props.thenotes,
         thedesc:props.thedesc,
@@ -126,10 +127,11 @@ this.setState(()=>({error:"Please enter Amount or Description"}))
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
         createAt: this.state.createAt.valueOf(),
-        note: this.state.note
+        note: this.state.note,
+       
       })
         
-            console.log("submitted",)
+            console.log("submitted", this.state.userid)
         }
 
 

@@ -17,6 +17,8 @@ const editpage= (props)=> {
     return  (<div><AddExpenseForm 
       expense= {props.expense}
       thenotes= {props.thenotes}
+      loggeduser= {props.loggeduser}
+      
       
       thedesc= {props.thedesc}
       exobject= {props.exobject}
@@ -28,6 +30,7 @@ const editpage= (props)=> {
       props.history.push('/');
 
       console.log('updated',expense)
+      console.log('updated', props.loggeduser)
     }}/>
 
     <button onClick={()=> {
@@ -44,7 +47,9 @@ const mapStateToProps= (state, props)=>{
 return {expense: state.expenses.find((expense)=>  expense.id===props.match.params.id),
       thenotes: state.expenses.map((expense)=>{return expense.note}),
       thedesc: state.expenses.map((expense)=>{return expense.description}),
-      exobject: state.expenses
+      exobject: state.expenses,
+      loggeduser: state.auth.uid
+      
 }
 
 }

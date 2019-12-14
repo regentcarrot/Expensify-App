@@ -22,7 +22,7 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 
-import AppRouter from './routers/AppRouter';
+import AppRouter, {history} from './routers/AppRouter';
 
 import'normalize.css/normalize.css';
 
@@ -30,7 +30,7 @@ import './styles/styles.scss';
 
 import configureStore from './store/configureStore'
 
-import {addexpense} from './actions/expenses';
+import {login, logout} from './actions/auth';
 
 import {startSetExpenses} from './actions/expenses';
 
@@ -38,7 +38,7 @@ import getvisibleexpenses from './selectors/expenses';
 
 import ExpenseListFilters from'./components/ExpenseListFilters';
 
-import './firebase/firebase';
+import {firebase} from './firebase/firebase';
 //import './playground/promises';
 
 const store= configureStore();
@@ -78,10 +78,37 @@ console.log('test')
 </Provider>
         
      );
+let hasRendered= false;
+const renderApp= ()=> {
 
+    if (!hasRendered) {
+        ReactDOM.render(jsx , document.getElementById("app"));
+        hasRendered= true;
+    } 
+}
      ReactDOM.render(<p>loading...</p> , document.getElementById("app"));
 
-     store.dispatch(startSetExpenses()).then(()=>{ ReactDOM.render(jsx , document.getElementById("app"));})
+   
+
+     firebase.auth().onAuthStateChanged((user)=>{
+        if (user) {
+            console.log('logged in, uid', user.uid);
+            
+            store.dispatch(login(user.uid));
+            store.dispatch(startSetExpenses()).then(()=>{ renderApp(); console.log(store.getState().expenses);})
+           
+            if (history.location.pathname==='/') {
+                history.push('/dashboard')
+            }
+        }else {
+            store.dispatch(logout());
+            renderApp();
+            history.push('/');
+            console.log('log out');
+           
+        }
+
+     })
 /*const Layout= (props)=> {
 
     return <div>

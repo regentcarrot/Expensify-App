@@ -20,7 +20,7 @@ const expenseReducer= (state=expensearray,action)=> {
         })
 
     case 'SET_EXPENSES':
-    return action.expenses;
+    return action.expenses
     default:
     return state;
     

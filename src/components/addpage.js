@@ -11,12 +11,13 @@ const addpage= (props)=> (
     expensesdesc= {props.expensesdesc}
     expensesnote= {props.expensesnote}
     allexpenses= {props.allexpenses}
-   
+    loggeduser= {props.loggeduser}
+    
     onSubmit= {(expen)=>{
         
         props.dispatch(startAddExpense(expen))
         props.history.push('/');
-        console.log(props.expensesdesc)
+        console.log(props.allexpenses)
         
     }}/>
     
@@ -30,7 +31,8 @@ return {
 
     expensesdesc: state.expenses.map((expense)=>{return expense.description}),
     expensesnote: state.expenses.map((expense)=>{return expense.note}),
-    allexpenses: state.expenses
+    allexpenses: state.expenses,
+    loggeduser: state.auth.uid
 }
 
 }
