@@ -26,12 +26,15 @@ class AddExpenseForm extends React.Component{
         haveExpense: props.expense? true:false,
         expensesdesc: props.expensesdesc,
         userid: props.expense? props.expense.userid:props.loggeduser,
+        uid: props.expense? props.expense.userid: "Error",
+        loggeduser: props.expense? props.loggeduser: undefined,
         expensesnote: props.expensesnote,
         thenotes: props.thenotes,
         thedesc:props.thedesc,
         exobject: props.exobject,
         theExpense: props.expense,
         allexpenses: props.allexpenses,
+        haveExpense: props.expense?true:false,
         
      calenderFocused: false,
     error:undefined};
@@ -104,9 +107,42 @@ e.preventDefault();
 this.setState(()=>({error:"Please enter Amount or Description"}))
 
 } */
+if (this.state.haveExpense) {
 
 
+    if (!this.state.description||!this.state.amount) {
 
+        this.setState(()=>({error:"Please enter Amount or Description"}))
+        
+        }   
+        
+        else{  
+
+            if(this.state.uid!==this.state.loggeduser) {
+                this.setState(()=>({error:"You cannot edit another users data"}))
+            } else {
+            /*let filterExpense= this.state.exobject.filter((item)=>{
+                return (item.id!==this.state.theExpense.id&&item.description===this.state.description)});
+            
+            let check = filterExpense.length>0?"Already Exists":"Submitted";
+            
+            this.setState(()=>({error:filterExpense.length}))*/
+           
+            
+      this.setState(() => ({ error: '' }));
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createAt: this.state.createAt.valueOf(),
+        note: this.state.note,
+       
+      })
+        
+            console.log("submitted", this.state.userid)
+        }}
+
+
+} else {
     if (!this.state.description||!this.state.amount) {
 
         this.setState(()=>({error:"Please enter Amount or Description"}))
@@ -132,10 +168,7 @@ this.setState(()=>({error:"Please enter Amount or Description"}))
       })
         
             console.log("submitted", this.state.userid)
-        }
-
-
-};
+        }}} ;
 
 
 render() {
