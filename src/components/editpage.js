@@ -18,6 +18,7 @@ const editpage= (props)=> {
       expense= {props.expense}
       thenotes= {props.thenotes}
       loggeduser= {props.loggeduser}
+      usersExpenses= {props.usersExpenses}
       
       
       thedesc= {props.thedesc}
@@ -31,11 +32,13 @@ const editpage= (props)=> {
 
       console.log('updated',expense)
       console.log('updated', props.loggeduser)
+      console.log('other users expenses', props.usersExpenses)
     }}/>
 
     <button onClick={()=> {
+      if (props.usersExpenses.indexOf(props.expense)>-1) {
       props.dispatch(startRemoveExpense(props.expense.id));
-      props.history.push('/');
+      props.history.push('/');} else { alert("You can only delete your own expenses")}
       }
       
       }>Remove Item</button>
@@ -48,7 +51,8 @@ return {expense: state.expenses.find((expense)=>  expense.id===props.match.param
       thenotes: state.expenses.map((expense)=>{return expense.note}),
       thedesc: state.expenses.map((expense)=>{return expense.description}),
       exobject: state.expenses,
-      loggeduser: state.auth.uid
+      loggeduser: state.auth.uid,
+      usersExpenses: state.expenses.filter((expense)=> expense.userid===`${state.auth.uid}`)
       
 }
 

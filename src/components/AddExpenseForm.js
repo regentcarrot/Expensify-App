@@ -121,6 +121,42 @@ if (this.state.haveExpense) {
             if(this.state.uid!==this.state.loggeduser) {
                 this.setState(()=>({error:"You cannot edit another users data"}))
             } else {
+
+                let filterExpense= this.state.exobject.filter((item)=>{
+                    return (item.id!==this.state.theExpense.id&&item.description===this.state.description)});
+                
+                let check = filterExpense.length>0?true:false;
+
+                        if(check) {this.setState(()=>({error:"Already Exists"}))
+                            } else {
+                    this.setState(() => ({ error: '' }));
+                    this.props.onSubmit({
+                      description: this.state.description,
+                      amount: parseFloat(this.state.amount, 10) * 100,
+                      createAt: this.state.createAt.valueOf(),
+                      note: this.state.note,
+                     
+                    })
+                      
+                          console.log("submitted", this.state.userid)}
+
+
+
+                
+                
+                // this.setState(()=>({error:check})) 
+
+                // if(!check) { this.setState(() => ({ error: '' }));
+                // this.props.onSubmit({
+                //   description: this.state.description,
+                //   amount: parseFloat(this.state.amount, 10) * 100,
+                //   createAt: this.state.createAt.valueOf(),
+                //   note: this.state.note,
+                 
+                // })
+                  
+                //       console.log("submitted", this.state.userid)}
+
             /*let filterExpense= this.state.exobject.filter((item)=>{
                 return (item.id!==this.state.theExpense.id&&item.description===this.state.description)});
             
@@ -129,16 +165,7 @@ if (this.state.haveExpense) {
             this.setState(()=>({error:filterExpense.length}))*/
            
             
-      this.setState(() => ({ error: '' }));
-      this.props.onSubmit({
-        description: this.state.description,
-        amount: parseFloat(this.state.amount, 10) * 100,
-        createAt: this.state.createAt.valueOf(),
-        note: this.state.note,
-       
-      })
-        
-            console.log("submitted", this.state.userid)
+     
         }}
 
 
@@ -147,9 +174,13 @@ if (this.state.haveExpense) {
 
         this.setState(()=>({error:"Please enter Amount or Description"}))
         
-        }   
+        }   else {  
+                if (this.state.expensesdesc.indexOf(this.state.description)>-1) {
+
+            this.setState(()=>({error:"already exits"}))
+            
         
-        else{  
+                }  else {
             /*let filterExpense= this.state.exobject.filter((item)=>{
                 return (item.id!==this.state.theExpense.id&&item.description===this.state.description)});
             
@@ -168,7 +199,7 @@ if (this.state.haveExpense) {
       })
         
             console.log("submitted", this.state.userid)
-        }}} ;
+        }}}} ;
 
 
 render() {
